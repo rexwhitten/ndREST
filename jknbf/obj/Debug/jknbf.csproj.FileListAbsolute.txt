@@ -1,0 +1,10 @@
+E:\github\jknbf\jknbf\bin\jknbf.dll.config
+E:\github\jknbf\jknbf\bin\jknbf.dll
+E:\github\jknbf\jknbf\bin\jknbf.pdb
+E:\github\jknbf\jknbf\bin\Newtonsoft.Json.dll
+E:\github\jknbf\jknbf\bin\RestSharp.dll
+E:\github\jknbf\jknbf\bin\Newtonsoft.Json.xml
+E:\github\jknbf\jknbf\bin\RestSharp.xml
+E:\github\jknbf\jknbf\obj\Debug\jknbf.csprojResolveAssemblyReference.cache
+E:\github\jknbf\jknbf\obj\Debug\jknbf.dll
+E:\github\jknbf\jknbf\obj\Debug\jknbf.pdb
