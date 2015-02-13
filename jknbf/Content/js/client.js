@@ -12,8 +12,8 @@ var NdClient = function (options) {
     self.options = options;
     
     self.nd = {
-        code: "9vj4j6GYd9l0/BQ/SLfealCzY6b3vm/8S9zZrB6SUtauKXYfBxvY4oFHTWFnDGCecrCu/jL/4KlXjNCGo17LMPD8v9VRch4x9EM0FxiFV3JLStKFycoNVj404HoQd899",
-        token: "Xho8zpEAvVuL2z33GjEmAL07S2oOjjqFKru29u+hOFrzjs7cgOeLlN3e3rtpSRh7hI2KzOEAc8wEYoXg6te0mofkQAkQsHGdon96xvW01Js2PLk2MQ2eMuqkgDZ9jqtt",
+        code: "AxxisfO6eKWZIqLO778SBODmLiRQO0vYzmCKEAR1LYYwO1334yqX4cS0pM6h1NjIdvgA2nC0nOqd1i1lSibKdSsbkn9r2pvtFSX8mvRNMd1YCHcCQ6wEclGaqfABq66A",
+        token: "14XW1TjpcxAfCKF1kT7hjjmNkpZeOtUQvJcq/3T0DHDxKgbNmzUG7hGTLqKL8e1Gzr7jydLso1Q1tg4X59zaSougeN5NuExPn7s/8biFSUBxL3dXxx/U6rI36w4olYEA",
         myUrl: null,
         requestDigest: null,
         search: null,
@@ -128,7 +128,7 @@ var nbfNdClient = new NdClient({
     },
     auth_url: function (debug) {
         var url = "";
-        var m_base_url = "https://vault.netvoyage.com/neWeb2/mobile/login.aspx?ie7warn=N";
+        var m_base_url = "login.html";
 
         if (debug) {
             url = url + m_base_url + '?client_id=' + this.ClientId + '&scope=' + this.Privileges + '&response_type=code&redirect_uri=' + "http://localhost/index.html";
