@@ -1,0 +1,32 @@
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\bin\Debug\OAuthSample.exe
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\bin\Debug\OAuthSample.pdb
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\bin\Debug\Newtonsoft.Json.dll
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\bin\Debug\RestSharp.dll
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\bin\Debug\Newtonsoft.Json.xml
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\bin\Debug\RestSharp.xml
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\OAuthSample.csprojResolveAssemblyReference.cache
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\MainWindow.baml
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\MainWindow.g.cs
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\App.g.cs
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\OAuthSample_MarkupCompile.cache
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\OAuthSample.g.resources
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\OAuthSample.Properties.Resources.resources
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\OAuthSample.csproj.GenerateResource.Cache
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\OAuthSample.exe
+C:\Users\treed\Source\Workspaces\Tech Services\OAuthSample\OAuthSample\obj\Debug\OAuthSample.pdb
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\OAuthSample.exe
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\OAuthSample.pdb
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\bin\Debug\OAuthSample.exe
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\bin\Debug\OAuthSample.pdb
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\bin\Debug\RestSharp.dll
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\bin\Debug\RestSharp.xml
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\OAuthSample.csprojResolveAssemblyReference.cache
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\MainWindow.baml
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\MainWindow.g.cs
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\App.g.cs
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\OAuthSample_MarkupCompile.cache
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\OAuthSample.g.resources
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\OAuthSample.Properties.Resources.resources
+C:\Users\rex\Desktop\OAuthSample\OAuthSample\obj\Debug\OAuthSample.csproj.GenerateResource.Cache
