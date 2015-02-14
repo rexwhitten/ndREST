@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Jackson Kelly | New Business Form Netdocuments Lookup</title>
+    <link href="Content/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="page-header">
+                <h1>New Business Form</h1>
+            </div>
+            <div class="row">
+                <span class="text-primary" id="nd_user"></span>
+            </div>
+        </div>
+        <div id="_primary_content" class="row">
+            <div class="col-lg-10">
+                <div class="alert alert-danger">
+                    <span>You are not authenticated to netDocuments</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="nbf_lookup">
+            <div class="col-lg-6">
+                <form id="nbF_lookup_form">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" id="_form_control" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" id="_form_control" type="text" />
+                    </div>
+
+                    <!-- Form Actions -->
+                    <button class="btn btn-primary">Save</button>
+                    <button class="btn btn-default">Reset</button>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <ul class="list-group">
+                    <li class="list-group-item">ND Cabinet</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+    </div>
+
+    <iframe id="_nd_"></iframe>
+
+    <!--Scripts  -->
+    <script src="Content/js/lib/jquery-1.11.0.js"></script>
+    <script src="Content/js/lib/bootstrap.min.js"></script>
+    <script src="Content/js/lib/jstorage.min.js"></script>
+    <script src="Content/js/lib/URI.min.js"></script>
+    <script src="Content/js/lib/Base64.js"></script>
+    <script src="Content/js/lib/jquery.base64.js"></script>
+    <script src="Content/js/lib/NDRest.js"></script>
+    <script src="Content/js/client.js"></script>
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            nbfNdClient.load(function () {
+                console.log("client loaded");
+            });
+        });
+    </script>
+</body>
+</html>
