@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jk.NBF", "jk.NBF\jk.NBF.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{CAE79AB0-C5F0-4025-A66D-9E152FA912F1}"
 	ProjectSection(SolutionItems) = preProject
+		design\design_requirements.md = design\design_requirements.md
 		design\net_documents_authentication.md = design\net_documents_authentication.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{B01DB902-0B6B-471D-BC88-C50FE15157CC}"
+	ProjectSection(SolutionItems) = preProject
+		NBF.sql = NBF.sql
 	EndProjectSection
 EndProject
 Global

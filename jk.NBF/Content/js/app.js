@@ -46,6 +46,7 @@ var NdClient = function (options) {
      */
     self.options = options;
 
+
     /**
      *
      * @description Cache object
@@ -65,6 +66,10 @@ var NdClient = function (options) {
         requestDigest: null,
         search: null,
         params: ""
+    };
+
+    self.nbf = {
+        nbf_key: ""
     };
 
     /**
@@ -93,7 +98,12 @@ var NdClient = function (options) {
             $li.append("<span class='text-primary' style='margin-right:50px'>" + member_index.replace("?","") + "</span>");
             $li.append("<span class='text-info'>" + params[member_index] + "</span>");
             $ul.append($li);
+
+            if (member_index.toLowerCase() == 'NBF_KEY') {
+                self.nbf.nbf_key = params[member_index];
+            }
         }
+
 
         $view_nbf.empty();
         $view_nbf.append($ul);
@@ -101,10 +111,72 @@ var NdClient = function (options) {
 
     /**
      * View/NetDocuments List
-     * @description Load 
+     * @description Loads the saved search results
+     * Make sure the saved search is correct in configuration
      */
     self.view_docs = function () {
+        var saved_search_results = self.ndREST.savedSearch.performSearch({
+            id: self.options.savedSearchId,
+            maxResults: 100,
+            skipToken: 0,
+            getCount: true
+        });
 
+        var _count = saved_search_results.countEstimate;
+        var _index = 0;
+
+        window.__nd_results = [];
+        var $doc = $("<div></div>");
+        $doc.addClass("list-group");
+        $doc.attr("id", "nd_list");
+        $('#view_docs').empty();
+        $('#view_docs').append($doc);
+
+        while (_index <= (_count - 1)) {
+            var _list_item = saved_search_results.list[_index];
+            self.ndREST.document.getInfo({
+                id: _list_item.envId,
+                success: function (_doc_info) {
+                    var _document_result = {};
+                    _document_result.envId = _doc_info.standardAttributes.envId;
+                    _document_result.extension = _doc_info.standardAttributes.extension;
+                    _document_result.id = _doc_info.standardAttributes.id;
+                    _document_result.name = _doc_info.standardAttributes.name;
+                    _document_result.url = _doc_info.standardAttributes.url;
+
+                    var $a = $('<a href="#"></a>');
+                    $a.addClass("list-group-item");
+                    $a.attr("data-env-id", _document_result.envId);
+                    $a.attr("data-nd-id", _document_result.id);
+                    $a.attr("data-nd-url", _document_result.url);
+                    $a.attr("data-nd-name", _document_result.name);
+                    $a.attr("data-selected", false);
+
+                    $a.on("click", function () {
+                        var selected = $(this).attr("data-selected");
+                        
+                        if (selected == false || selected == 'false') {
+                            $(this).attr("data-selected", true);
+                            $(this).addClass("list-group-item-success");
+                        } else {
+                            $(this).attr("data-selected", false);
+                            $(this).removeClass("list-group-item-success");
+                        }
+                    });
+
+                    $a.append(_document_result.name);
+                    $('#nd_list').append($a);
+                },
+                error: function (e, v, t) {
+                    console.log(v + ":" + t);
+                    var _document_result = {};
+                    _document_result.envId = _list_item.envId;
+                    _cache.set(_document_result.envId, _document_result);
+                    window.__nd_results.push(_document_result);
+                }
+            });
+            _index++;
+        }
     };
 
     /**
@@ -112,7 +184,53 @@ var NdClient = function (options) {
      * @description NBF Netdocuments View
      */
     self.view_actions = function () {
+        var $view_actions = $('#view_actions');
 
+        var $btngrp = $("<div></div>");
+        $btngrp.addClass("btn-grp");
+        $btngrp.attr("role", "group");
+            
+        var $save = $("<a>Save</a>");
+        $save.addClass("btn btn-primary");
+
+        $save.on("click", function () {
+            var e = "data-selected";
+            var selected_docs = [];
+
+            var selectedSet = $('a[data-selected="true"]');
+            console.log(selectedSet);
+
+            var c = selectedSet.length;
+            var i = 0;
+
+            while (i <= (c - 1)) {
+                var _selected = $(selectedSet[i]);
+
+                var selected_doc = {};
+                
+                selected_doc.env_id = _selected.attr("data-env-id");
+                selected_doc.nd_id = _selected.attr("data-nd-id");
+                selected_doc.url = _selected.attr("data-url");
+                selected_doc.name = _selected.attr("data-nd-name");
+                selected_docs.push(selected_doc);
+                selected_doc.nbf_key = self.nbf.nbf_key;
+
+                // Make Ajax Call to my own data save page
+
+                i++;
+            }
+            
+
+        });
+
+        var $reset = $("<a>Reset</a>");
+        $reset.addClass("btn btn-default");
+
+        $btngrp.append($save)
+               .append($reset);
+
+        $view_actions.empty()
+                     .append($btngrp);
     };
 
     /**
@@ -130,7 +248,10 @@ var NdClient = function (options) {
                 console.log("user is authenticated");
                 check_ballback(true);
             },
-            error: function (e,t,j) {
+            error: function (e, t, j) {
+                if (self.options.debug == false) {
+                    self.UnAuthenticated();
+                }
                 console.log("error authenticating: " + j);
                 check_ballback(false);
             }
@@ -141,7 +262,7 @@ var NdClient = function (options) {
      * @description handles when a user is not authenticated to netdocuments
      */
     self.UnAuthenticated = function () {
-        console.log("unauthetnicated");
+        console.log("un-authenticated");
         window.location = "login.html";
     };
 
@@ -152,13 +273,15 @@ var NdClient = function (options) {
         console.log("loading app");
 
         // check for debug mode, set the access code and access tokens
-        // Access Code
-        self.nd.code = "njAGtL6H4wk9rO+YRsmYMtYQTPsdenZYwtRa/9YHgCZPQ9HWJS4Cf/OyR3syuXMfAsVr5PxionIrUSKxcuH7jjjfl57bZFyiDlPGPUj99WR+fI1ZhtGGSJkZMjJBXh50";
-        _cache.set("code", self.nd.code, { 'expireDays': .5 });
-        // Access Token
-        self.nd.token = "aCKcVaIWpqYAipR335lSV/kUIzncLOkptBG3d734hrWoKEqn0WrV2HLjb7Et/FqhFlWDi4F/PIw2IkcuxcW7ZvU1jQN5+OwJ128EkEiXTwNlINU1/O/+A2+SR4wRbyYH";
-        _cache.set("token", self.nd.token, { 'expireDays': .5 });
-        
+        if (self.options.debug) {
+            // Access Code
+            self.nd.code = "57jCu2S/kQYGzDHCt6tmlUKz3iw1P9b2kGJBwe9xTQ5t1ADLexyHE/3mf+CF1+pJJ6KYKqcHapRBlmDvDFHcC/tvo4H8xiJEjSuj0wdq02ZnpIAV/zy6ChZYIPZhS3QU";
+            _cache.set("code", self.nd.code, { 'expireDays': .5 });
+            // Access Token
+            self.nd.token = "1wb7gMiCKienr1bsoKdaNnHWh22eL1xCwYpDfynZDyRD4yRbX9lkpOD/K3DcqNwP2tpySJZ9XYzoGWmRb4Xb5dzm/URKBkr0wZutuncdL6PsSvLukH0Wpukj5Xs0TezO";
+            _cache.set("token", self.nd.token, { 'expireDays': .5 });
+        }
+
         // Check to see if the tokens are present 
         if (_cache.get("token") == null || _cache.get("code") == null) {
             if (self.options.debug) {
@@ -194,6 +317,9 @@ var NdClient = function (options) {
         });
     }
 
+
+
+
     /**
      *  call Load
      */
@@ -214,6 +340,7 @@ var nbfNdClient = new NdClient({
     ClientSecret: "0VwqE6f4b9ErcDFRbivG6J42QzisW5maYyLD6GGHH4OGLd3q", // THIS NEEDS TO BE SET
     OAuthURL: "https://vault.netvoyage.com/neWeb2/OAuth.aspx",
     cabinetName: "Client Documents",
+    savedSearchId: "4812-5534-3643",
     fullURL: function (debug) {
         var url = "";
 
