@@ -137,12 +137,22 @@ var NdClient = function (options) {
             self.ndREST.document.getInfo({
                 id: _list_item.envId,
                 success: function (_doc_info) {
+
+                    console.log(_doc_info);
+
                     var _document_result = {};
                     _document_result.envId = _doc_info.standardAttributes.envId;
                     _document_result.extension = _doc_info.standardAttributes.extension;
                     _document_result.id = _doc_info.standardAttributes.id;
                     _document_result.name = _doc_info.standardAttributes.name;
                     _document_result.url = _doc_info.standardAttributes.url;
+
+                    // Custom Attributes 
+                    for (var custom_att_index in _doc_info.customAttributes) {
+                        var custom_attribute = _doc_info.customAttributes[custom_att_index];
+                        _document_result[custom_attribute.description] = custom_attribute.value;
+                    }
+
 
                     var $a = $('<a href="#"></a>');
                     $a.addClass("list-group-item");
@@ -214,11 +224,30 @@ var NdClient = function (options) {
                 selected_docs.push(selected_doc);
                 selected_doc.nbf_key = self.nbf.nbf_key;
 
+                var model = {
+                    DocumentId: selected_doc.env_id,
+                    NetDocumentsNumber: selected_doc.nd_id,
+                    NetDocumentsUrl: selected_doc.url,
+                    NetDocumentsDescription: selected_doc.name,
+                    WorlDoxNumbers: "",
+                    DocTypeId: 1,
+                    NBF_Key: selected_doc.nbf_key
+                }
+
+                $.ajax({
+                    url: "data/SaveDocument.aspx",
+                    type: "POST",
+                    data: model,
+                }).done(function (msg) {
+                    alert("Data Saved: " + msg);
+                });
+
                 // Make Ajax Call POST Saved Document
                 console.log(selected_doc);
-
                 i++;
             }
+
+            window.location = "saved.html";
 
         });
 
@@ -339,7 +368,7 @@ var nbfNdClient = new NdClient({
     ClientSecret: "0VwqE6f4b9ErcDFRbivG6J42QzisW5maYyLD6GGHH4OGLd3q", // THIS NEEDS TO BE SET
     OAuthURL: "https://vault.netvoyage.com/neWeb2/OAuth.aspx",
     cabinetName: "Client Documents",
-    savedSearchId: "4812-5534-3643",
+    savedSearchId: "4822-8047-6450",
     fullURL: function (debug) {
         var url = "";
 

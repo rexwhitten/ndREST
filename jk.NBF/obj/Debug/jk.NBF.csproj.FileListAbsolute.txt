@@ -4,3 +4,5 @@ D:\github\ndREST\jk.NBF\bin\jk.NBF.pdb
 D:\github\ndREST\jk.NBF\obj\Debug\jk.NBF.csprojResolveAssemblyReference.cache
 D:\github\ndREST\jk.NBF\obj\Debug\jk.NBF.dll
 D:\github\ndREST\jk.NBF\obj\Debug\jk.NBF.pdb
+D:\github\ndREST\jk.NBF\bin\Newtonsoft.Json.dll
+D:\github\ndREST\jk.NBF\bin\Newtonsoft.Json.xml
