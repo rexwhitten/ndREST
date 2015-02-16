@@ -1,5 +1,35 @@
 ﻿/// <reference path="_references.js" />
 
+/**
+ * @class NBFDocument 
+ * @description  NBF document Model that will be saved to the database
+ */
+var NBFDOcument = function (obj) {
+    var self = {};
+
+    self.DocumentId = new Number();
+    self.NetDocumentsNumber = new String();
+    self.NetDocumentsURL = new String();
+    self.NetDocumentsDescription = new String();
+    self.WorlDoxNumbers = new String();
+    self.DocTypeId = new String();
+    self.NBF_Key = new String();
+
+
+    if (obj) {
+        self.DocumentId = obj.DocumentId;
+        self.NetDocumentsNumber = obj.NetDocumentsNumber;
+        self.NetDocumentsURL = obj.NetDocumentsURL;
+        self.NetDocumentsDescription = obj.NetDocumentsDescription;
+        self.WorlDoxNumbers = obj.WorlDoxNumbers;
+        self.DocTypeId = obj.DocTypeId;
+        self.NBF_Key = obj.NBF_Key;
+    }
+
+    return self;
+}
+
+
 
 /**
  * @module nbf/client
@@ -38,34 +68,52 @@ var NdClient = function (options) {
     };
 
     /**
-     * NBF COntext Query 
-     * @description NBF Object
+     * View/NBF Query Parameters
+     * @description Load the NBF query View
      */
     self.view_nbf = function () {
-        var _nbf_ = {};
-
         var $view_nbf = $('#view_nbf');
-
-        var query = {};
-        query.path = window.location.pathname;
-
         var $ul = $('<ul></ul>');
         $ul.addClass("list-group");
+        var params = {}, queries, temp, i, l;
 
-        for (var member_index in query) {
+        // Split into key/value pairs
+        var queryString = window.location.search;
+        queries = queryString.split("&");
+
+        // Convert the array of strings into an object
+        for (i = 0, l = queries.length; i < l; i++) {
+            temp = queries[i].split('=');
+            params[temp[0]] = temp[1];
+        }
+        
+        for (var member_index in params) {
             var $li = $("<li></li>");
             $li.addClass("list-group-item");
-
-            $li.append("<span class='text-primary'>" + member_index + "</span>");
-            $li.append("<span class='text-info'>" + query[member_index] + "</span>");
+            $li.append("<span class='text-primary' style='margin-right:50px'>" + member_index.replace("?","") + "</span>");
+            $li.append("<span class='text-info'>" + params[member_index] + "</span>");
             $ul.append($li);
         }
 
         $view_nbf.empty();
         $view_nbf.append($ul);
-        return _nbf_;
     }
 
+    /**
+     * View/NetDocuments List
+     * @description Load 
+     */
+    self.view_docs = function () {
+
+    };
+
+    /**
+     * Loads the available Save/Update Actions
+     * @description NBF Netdocuments View
+     */
+    self.view_actions = function () {
+
+    };
 
     /**
      * @description netdocuments library 
@@ -94,6 +142,7 @@ var NdClient = function (options) {
      */
     self.UnAuthenticated = function () {
         console.log("unauthetnicated");
+        window.location = "login.html";
     };
 
     /**
@@ -131,7 +180,10 @@ var NdClient = function (options) {
         self.IsAuthenticated(function (auth) {
             if (auth == true) {
                 console.log("user is authenticated to netdocuments");
-                // Load View
+                // Load Views
+                self.view_nbf();
+                self.view_docs();
+                self.view_actions();
             }
             else {
                 console.log("user is authenticated NOT to netdocuments");
@@ -142,7 +194,9 @@ var NdClient = function (options) {
         });
     }
 
-
+    /**
+     *  call Load
+     */
     self.Load();
     // -------------------------------------------------------------------------------------------------------
     return self;
