@@ -99,7 +99,7 @@ var NdClient = function (options) {
             $li.append("<span class='text-info'>" + params[member_index] + "</span>");
             $ul.append($li);
 
-            if (member_index.toLowerCase() == 'NBF_KEY') {
+            if (member_index.toLowerCase().replace("?", "") == 'nbf_key') {
                 self.nbf.nbf_key = params[member_index];
             }
         }
@@ -198,7 +198,6 @@ var NdClient = function (options) {
             var selected_docs = [];
 
             var selectedSet = $('a[data-selected="true"]');
-            console.log(selectedSet);
 
             var c = selectedSet.length;
             var i = 0;
@@ -210,16 +209,16 @@ var NdClient = function (options) {
                 
                 selected_doc.env_id = _selected.attr("data-env-id");
                 selected_doc.nd_id = _selected.attr("data-nd-id");
-                selected_doc.url = _selected.attr("data-url");
+                selected_doc.url = _selected.attr("data-nd-url");
                 selected_doc.name = _selected.attr("data-nd-name");
                 selected_docs.push(selected_doc);
                 selected_doc.nbf_key = self.nbf.nbf_key;
 
-                // Make Ajax Call to my own data save page
+                // Make Ajax Call POST Saved Document
+                console.log(selected_doc);
 
                 i++;
             }
-            
 
         });
 
