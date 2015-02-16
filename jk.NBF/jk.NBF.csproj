@@ -57,8 +57,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\app.css" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\js\lib\head.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -71,25 +73,23 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\js\client.js" />
+    <Content Include="Content\js\app.js" />
     <Content Include="Content\js\lib\Base64.js" />
+    <Content Include="Content\js\lib\basil.js" />
+    <Content Include="Content\js\lib\basil.min.js" />
     <Content Include="Content\js\lib\bootstrap.js" />
     <Content Include="Content\js\lib\bootstrap.min.js" />
-    <Content Include="Content\js\lib\jquery-1.11.0.js" />
-    <Content Include="Content\js\lib\jquery-filetype.js" />
-    <Content Include="Content\js\lib\jquery.base64.js" />
-    <Content Include="Content\js\lib\jquery.blockUI.js" />
-    <Content Include="Content\js\lib\jquery.hashchange.js" />
-    <Content Include="Content\js\lib\jquery.tablesorter.pager.js" />
-    <Content Include="Content\js\lib\jstorage.js" />
-    <Content Include="Content\js\lib\jstorage.min.js" />
+    <Content Include="Content\js\lib\head.js" />
+    <Content Include="Content\js\lib\head.min.js" />
+    <Content Include="Content\js\lib\jquery.js" />
+    <Content Include="Content\js\lib\jquery.min.js" />
     <Content Include="Content\js\lib\knockout-3.0.0.js" />
     <Content Include="Content\js\lib\KnockoutImplementation.js" />
-    <Content Include="Content\js\lib\NDRest.js" />
+    <Content Include="Content\js\app\NDRest.js" />
     <Content Include="Content\js\lib\quickSearck.js" />
-    <Content Include="Content\js\lib\tablesorter.js" />
     <Content Include="Content\js\lib\URI.js" />
     <Content Include="Content\js\lib\URI.min.js" />
+    <None Include="Content\js\_references.js" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="login.html" />
@@ -101,7 +101,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Auth\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
