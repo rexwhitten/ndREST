@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jk.NBF", "jk.NBF\jk.NBF.csproj", "{C8F1E307-3AB5-4C1D-BCDC-325AD7E76850}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{CAE79AB0-C5F0-4025-A66D-9E152FA912F1}"
+	ProjectSection(SolutionItems) = preProject
+		design\net_documents_authentication.md = design\net_documents_authentication.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
