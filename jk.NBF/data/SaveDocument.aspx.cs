@@ -22,7 +22,7 @@ namespace jk.NBF.data
 
         public String WorlDoxNumbers  { get; set; }
 
-        public Int32 DocTypeId  { get; set; }
+        public String DocTypeName  { get; set; }
 
         public Int32 NBF_Key  { get; set; }
 
@@ -38,7 +38,13 @@ namespace jk.NBF.data
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            NBFDocument model = JsonConvert.DeserializeObject<NBFDocument>(Request.Headers["nbf_doc"]);
+            if (Request.Headers.AllKeys.Contains("nbf_doc") == false)
+            {
+                Response.End();
+            }
+
+
+           NBFDocument model = JsonConvert.DeserializeObject<NBFDocument>(Request.Headers["nbf_doc"]);
 
             bool result = this.Save(model);
             
@@ -60,9 +66,32 @@ namespace jk.NBF.data
         private bool Save(NBFDocument model)
         {
             bool result = false;
+            string db_result = "";
 
             try
             {
+                var access = DataAccess.Create("default");
+
+                access.CreateProcedureCommand("[dbo].[NBFDocument_Insert]");
+                access.AddParameter("@NetDocumentsNumber", model.NetDocumentsNumber, ParameterDirection.Input);
+                access.AddParameter("@NetDocumentsURL", model.NetDocumentsUrl, ParameterDirection.Input);
+                access.AddParameter("@NetDocumentsDescription", model.NetDocumentsDescription, ParameterDirection.Input);
+                access.AddParameter("@WorlDoxNumbers", model.WorlDoxNumbers, ParameterDirection.Input);
+                access.AddParameter("@DocTypeName", model.DocTypeName, ParameterDirection.Input);
+                access.AddParameter("NBF_Key", model.NBF_Key, ParameterDirection.Input);
+
+                var _tempResults = access.ExecuteDataSet();
+
+                if (_tempResults != null)
+                {
+                    db_result = _tempResults.Tables[0].Rows[0][0].ToString();
+                }
+
+                // Check the results from the Database 
+                if (db_result.ToLower() != "ok")
+                {
+                    result = false;
+                }
 
                 result = true;
             }

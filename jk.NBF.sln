@@ -13,7 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "design", "design", "{CAE79A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{B01DB902-0B6B-471D-BC88-C50FE15157CC}"
 	ProjectSection(SolutionItems) = preProject
-		NBF.sql = NBF.sql
+		database\dbo.NBFDocument_Insert.sql = database\dbo.NBFDocument_Insert.sql
+		database\NBF.sql = database\NBF.sql
 	EndProjectSection
 EndProject
 Global

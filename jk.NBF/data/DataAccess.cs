@@ -53,13 +53,9 @@ namespace jk.NBF.data
         {
         }
 
-        public DataAccess(string connectionStringName)
+        public DataAccess(string connectionString)
         {
-            var connectionStringSection = ConfigurationManager.ConnectionStrings[ connectionStringName ];
-            if ( connectionStringSection == null )
-                connectionStringSection = WebConfigurationManager.ConnectionStrings[ connectionStringName ];
-
-            this.CreateConnection( connectionStringSection.ConnectionString );
+            this.CreateConnection(connectionString);
             this.DatabaseName = this.Connection.Database;
         }
 

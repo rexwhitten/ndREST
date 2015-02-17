@@ -225,19 +225,21 @@ var NdClient = function (options) {
                 selected_doc.nbf_key = self.nbf.nbf_key;
 
                 var model = {
-                    DocumentId: selected_doc.env_id,
+                    DocumentId: 0,
                     NetDocumentsNumber: selected_doc.nd_id,
                     NetDocumentsUrl: selected_doc.url,
                     NetDocumentsDescription: selected_doc.name,
                     WorlDoxNumbers: "",
-                    DocTypeId: 1,
+                    DocTypeName: "engagement",
                     NBF_Key: selected_doc.nbf_key
                 }
 
                 $.ajax({
                     url: "data/SaveDocument.aspx",
                     type: "POST",
-                    data: model,
+                    headers: {
+                        "nbf_doc": JSON.stringify(model)
+                    }
                 }).done(function (msg) {
                     alert("Data Saved: " + msg);
                 });
@@ -303,10 +305,10 @@ var NdClient = function (options) {
         // check for debug mode, set the access code and access tokens
         if (self.options.debug) {
             // Access Code
-            self.nd.code = "57jCu2S/kQYGzDHCt6tmlUKz3iw1P9b2kGJBwe9xTQ5t1ADLexyHE/3mf+CF1+pJJ6KYKqcHapRBlmDvDFHcC/tvo4H8xiJEjSuj0wdq02ZnpIAV/zy6ChZYIPZhS3QU";
+            self.nd.code = "8zAWRSt8oNHTG06JxhKEIA8IId/RkAD+ZfleYECDbfhHPeZU7NVlh5vt8NoDAimEWEZhAUphz1jT3D8jWO/4jbu9JWG4Sx9/zZnVZTGLXNvuDgO0v11JIP7T7rxsbvFA";
             _cache.set("code", self.nd.code, { 'expireDays': .5 });
             // Access Token
-            self.nd.token = "1wb7gMiCKienr1bsoKdaNnHWh22eL1xCwYpDfynZDyRD4yRbX9lkpOD/K3DcqNwP2tpySJZ9XYzoGWmRb4Xb5dzm/URKBkr0wZutuncdL6PsSvLukH0Wpukj5Xs0TezO";
+            self.nd.token = "fNb98ibhohwHm36SYnFVqauewJNj5KAVmiHxRobE44N6If6OO1l1NS1IV7VBI+AvH1XPwaY6BZksQEPPacnahVK4ezfHja+8FhpN4oX4jap6bL8mQyXhTfv5xBQ5t6YF";
             _cache.set("token", self.nd.token, { 'expireDays': .5 });
         }
 
